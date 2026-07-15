@@ -1,0 +1,27 @@
+[Unit]
+Description={{PROJECT_NAME}} FastAPI Service
+After=network.target
+
+[Service]
+
+User={{SERVICE_USER}}
+Group={{SERVICE_USER}}
+
+WorkingDirectory={{BACKEND_PATH}}
+
+Environment="PATH={{BACKEND_PATH}}/{{VENV_NAME}}/bin"
+
+ExecStart={{BACKEND_PATH}}/{{VENV_NAME}}/bin/gunicorn \
+    -k uvicorn.workers.UvicornWorker \
+    -w {{WORKERS}} \
+    -b 0.0.0.0:{{PORT}} \
+    {{APP_MODULE}}
+
+Restart=always
+RestartSec=5
+
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
