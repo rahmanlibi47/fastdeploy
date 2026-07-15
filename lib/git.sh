@@ -15,7 +15,7 @@ clone_repository() {
     require_variable GITHUB_REPO
     require_variable PROJECT_NAME
 
-    PROJECT_PATH="/opt/$PROJECT_NAME"
+    PROJECT_PATH="/home/$SUDO_USER/$PROJECT_NAME"
 
     export PROJECT_PATH
 
